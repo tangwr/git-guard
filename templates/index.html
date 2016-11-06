@@ -27,6 +27,10 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/heatmap.css"> 
 	<!-- Stack Bar CSS -->
 	<link rel="stylesheet" type="text/css" href="../static/css/stackBar.css"> 
+	<!-- Scroll CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/scroll.css"> 
+	<!-- Tree CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/tree.css"> 
 
 	<!-- BootStrap -->
 	<!-- Latest compiled and minified CSS -->
@@ -42,10 +46,11 @@
 <body>
 	
 	
+	
 	<div class="centered">
 		<form action="/logout" method="post">
 			<h1>
-				Git Guard {{pig}}
+				Git Guard {{user}}
 
 				 {% for but in button %}
 	                   
@@ -160,7 +165,9 @@
 	    	<input id="searchBox" type="text" class="form-control" placeholder="Search for...">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="submit" id="searchButton">
+					<a href="#all">
 					<span class=" glyphicon glyphicon-search"></span>
+					</a>
 				</button>
 			</span>
 	    </div>
@@ -168,10 +175,12 @@
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
+	
 	<div id="commitActivityChart1"></div>
 	<div id="all">
 
 		<div class="col-md-8 navCenter">
+		<h3>Repository Summary</h3>
 			<ul class="nav nav-tabs">
 		        <li class="active"><a data-toggle="tab" href="#commitActivity">Commit Activity</a></li>
 		        <li><a data-toggle="tab" href="#punchCard">Punch Card</a></li>      
@@ -191,14 +200,14 @@
 
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/><br/></br>
+		<br/><br/><br/><br/><br/><br/><br/><br/></br><br/></br>
 	
 		
 		<div class="container" id="divTable">
 			
 			
 			<div class="tableFrame">
-				<h3>Contributors</h3>
+				<h3>Repository Contributors</h3>
 				<table id="userTable" class="display tableFrame" cellspacing="0">
 					
 					<thead>
@@ -247,13 +256,27 @@
 				</div>
 			</div>
 		</div>
+
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+		
+		<h3 align="center">Repository Tree</h3>
 	</div>
+
+	<div id="tree-container" align="center"></div>
+	<div id="br"><br/><br/><br/><br/><br/><br/><br/></div>
 	<!--
 	<div>
 		<svg id="pig" width="960" height="500"></svg>
 	</div>
-	-->
+	
 	<div id="chart" align="center"></div>
+	-->
+	
 
 
 	<!--JS-->
@@ -264,6 +287,8 @@
 	<script src="../static/js/heatmap.js"></script>
 	<script src="../static/js/stackBar.js"></script>
 	<script src="../static/js/multiLine.js"></script>
+	<script src="../static/js/scroll.js"></script>
+	<script src="../static/js/tree.js"></script>
 
 
 </body>

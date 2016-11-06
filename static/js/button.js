@@ -34,6 +34,8 @@ $("#searchBox").val("https://github.com/nusmodifications/nusmods");
 $("#all").hide();
 $("#divTable").hide();
 $("#commitHistory").hide();
+$("#tree-container").hide();
+$("#br").hide();
 
 
 //$("#notificationButton").hide();
@@ -49,6 +51,8 @@ $("#searchButton").click(function(){
   $("#divTable").show();
   $("#all").show();
   $("#notificationButton").show();
+  $("#tree-container").show();
+  $("#br").show();
   
 
   var link = $("#searchBox").val();
@@ -75,7 +79,7 @@ $("#searchButton").click(function(){
   
   getHeatMap(url);
   getBarChart(url);
-	
+	getTree();
  
 
 
@@ -83,9 +87,14 @@ $("#searchButton").click(function(){
 });
 
 $("#getButton").click(function(){
-  
+  d3.selectAll("svg").remove();
   $("#commitHistory").show();
   getMultiLineGraph(url);
+  
+  
+  getHeatMap(url);
+  getBarChart(url);
+  getTree();
 });
 
 

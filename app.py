@@ -26,13 +26,20 @@ def getSession():
 @app.route('/')
 @app.route('/home')
 def main():
-	pig = request.args.get('msg')
-	if pig != None:
-		pig = "Welcome " + pig
+	#pig = request.args.get('msg')
+	username = session.get('user')	
+	if username != None:
+		username = username.split("@")[0]
+	else:
+		username = ""
 
 	button = getSession()
 	
-	return render_template("index.html", button=button)
+	return render_template("index.html", button=button, user="")
+
+@app.route('/tree')
+def tree():
+	return render_template("tree.html")
 
 
 @app.route('/login', methods=['POST', 'GET'])
