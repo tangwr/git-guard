@@ -1,0 +1,15 @@
+.centered {
+  position: static;
+  top: 50%;
+  left: 50%;
+  margin-top: 15%;
+  margin-left: 20%;
+}
+
+#home {
+    padding:20px 40px 130px 40px;
+}
+
+.navCenter{
+	left: 17%;
+}
