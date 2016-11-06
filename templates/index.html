@@ -57,7 +57,7 @@
 	                {% endif %}
 	                {% if but == "Notification" %}
 	                	
-	                		<button class="btn btn-primary" type="button" id="notificationButton" data-toggle="modal" data-target="#notificationModal">Notifcation</button>
+	                		<button style="display: none;" class="btn btn-primary" type="button" id="notificationButton" data-toggle="modal" data-target="#notificationModal">Notifcation</button>
 	                	
 	                {% endif %}
 	                {% if but == "Logout" %}
@@ -140,7 +140,7 @@
 			      </div>
 			      <div class="modal-body">
 			      	Repository:
-			      	<input class="form-control" type="text" placeholder="repo" id="notifyRepo" name="notifyRepo" readonly="readonly">
+			      	<input class="form-control" type="text" placeholder="" id="notifyRepo" name="notifyRepo" readonly="readonly" required>
 			      	Email:
 			       	<textarea class="form-control" id="notifyEmail" name="notifyEmail" rows="3" placeholder="Emails" required></textarea>     
 			        

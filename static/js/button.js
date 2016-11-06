@@ -39,7 +39,7 @@ $("#commitHistory").hide();
 //$("#notificationButton").hide();
 
 
-var data1 = {"d":"dd"};
+
 //cs2103aug2015-w09-2j/main
 $("#searchButton").click(function(){
 

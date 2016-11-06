@@ -11,10 +11,9 @@ app.secret_key = 'why would I tell you my secret key?'
 
 def getSession():
 	try:
-		session['user'] = session.get('user')	
-		session['repo'] = session.get('repo')		
+		session['user'] = session.get('user')			
 	except KeyError:
-		session['repo'] = None
+		session['user'] = None
 	finally:
 		if session.get('user') is None:
 			button = ["Login", "Register"]
@@ -85,7 +84,7 @@ def notification():
 	repo = request.form['notifyRepo']
 	email = request.form['notifyEmail']
 
-	session["repo"] = request.form['notifyRepo']
+	
 
 	emailArr = email.split("\r\n")  
 	
@@ -117,16 +116,17 @@ def search():
 
 	
 	username = session["user"]
-	repo = request.form['javascript_data']
+	repo = request.form['javascript_data'] #.split("https://")[1]
 	
 	print repo 
-	"""
+	print username
+	
 	b = Boto3Wrapper('subs3219')
 	n = Notifier(b)
 
 
 	n.UpdateTime(username, repo)
-	"""
+	
 	#return json.dumps({'message':'User created successfully !'})
 	
 	return repo
