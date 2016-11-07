@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Assignment 5</title>
+
+	<!--d3.js version 3 -->
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<!-- d3.js version 4 -->
+	<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+	<!--jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<!-- Datatable JS -->
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+	<!-- Datatable CSS-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">  
+	<!-- Datatables CSS-->
+	<link rel="stylesheet" type="text/css" href="../static/css/datatable.css"> 
+	<!-- line graph css -->
+	<link rel="stylesheet" type="text/css" href="../static/css/linegraph.css"> 
+	<!-- multi line graph css -->
+	<link rel="stylesheet" type="text/css" href="../static/css/multiLine.css"> 
+	<!-- search bar css -->
+	<link rel="stylesheet" type="text/css" href="../static/css/searchBar.css"> 
+	<!-- Heat Map CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/heatmap.css"> 
+	<!-- Stack Bar CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/stackBar.css"> 
+	<!-- Scroll CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/scroll.css"> 
+	<!-- Tree CSS -->
+	<link rel="stylesheet" type="text/css" href="../static/css/tree.css"> 
+
+	<!-- BootStrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	
+	
+	<div id="commitActivityChart1"></div>
+	<div id="all">
+
+		<div class="col-md-8 navCenter">
+		<h3>Repository Summary</h3>
+			<ul class="nav nav-tabs">
+		        <li><a data-toggle="tab" href="#commitActivity">Commit Activity</a></li>
+		        <li class="active"><a data-toggle="tab" href="#punchCard">Punch Card</a></li>      
+		    </ul>
+
+			<div class="tab-content">
+		        <div id="commitActivity" class="tab-pane fade">
+		        	<div id="commitActivityChart" align="center"></div>
+		        </div>
+
+			    <div id="punchCard" class="tab-pane fade in active">
+			    	<br/>
+			    	<div id="punchCardChart" align="center"></div>
+			    </div>
+			</div>
+		</div>
+
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/><br/></br><br/></br>
+	
+		
+		<div class="container" id="divTable">
+			
+			
+			<div class="tableFrame">
+				<h3>Repository Contributors</h3>
+				<table id="userTable" class="display tableFrame" cellspacing="0">
+					
+					<thead>
+					    <tr>
+					        <th>Collaborators</th>
+							<th>Additions</th>
+							<th>Deletions</th>
+							<th>Commits</th>
+					        <th>Select All <input type="checkbox" name="select_all" value="1" id="check-select-all"></th>
+					    </tr>
+				    </thead>
+			        <tbody>
+			       
+			        </tbody>
+			         
+			    </table>
+			    
+			    <button type = "button" class = "btn btn-info" id="getButton">
+			    	Commit History <span class = "glyphicon glyphicon-search"></span>
+			    </button> 
+			</div>
+		</div>
+		
+		
+		<br/><br/>
+
+		<div id="commitHistory">
+			<div class="col-md-8 navCenter">
+				<ul class="nav nav-tabs">
+			        <li class="active"><a data-toggle="tab" href="#addition">Addition</a></li>
+			        <li><a data-toggle="tab" href="#deletion">Deletion</a></li>  
+			        <li><a data-toggle="tab" href="#commit">Commit</a></li>     
+			    </ul>
+
+				<div class="tab-content">
+			        <div id="addition" class="tab-pane fade in active">
+			        	<div id="additionChart" align="center"></div>
+			        </div>
+
+				    <div id="deletion" class="tab-pane fade">
+				    	<div id="deletionChart" align="center"></div>
+				    </div>
+				    <div id="commit" class="tab-pane fade">
+				    	<div id="commitChart" align="center"></div>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+		
+		<h3 align="center">Repository Tree</h3>
+	</div>
+
+	<div id="tree-container" align="center"></div>
+	<div id="br"><br/><br/><br/><br/><br/><br/><br/></div>
+	<!--
+	<div>
+		<svg id="pig" width="960" height="500"></svg>
+	</div>
+	
+	<div id="chart" align="center"></div>
+	-->
+	
+
+
+	<!--JS-->
+	
+	<script src="../static/js/encrypt.js"></script>
+	<script src="../static/js/datatable.js"></script>
+	
+	<!--<script src="js/linegraph.js"></script>-->
+	<script src="../static/js/heatmap.js"></script>
+	<script src="../static/js/stackBar.js"></script>
+	<script src="../static/js/multiLine.js"></script>
+	<script src="../static/js/scroll.js"></script>
+	<script src="../static/js/tree.js"></script>
+	<script src="../static/js/repo.js"></script>
+
+
+</body>
+</html>

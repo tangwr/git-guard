@@ -30,13 +30,14 @@ $("#clearButton").click(function(){
   d3.selectAll("svg").remove();
 });
 */
+/*
 $("#searchBox").val("https://github.com/nusmodifications/nusmods");
 $("#all").hide();
 $("#divTable").hide();
 $("#commitHistory").hide();
 $("#tree-container").hide();
 $("#br").hide();
-
+*/
 /*
 //$("#notificationButton").hide();
 function encrypt(string){
@@ -63,8 +64,26 @@ function decode(encodedString){
 }
 */
 
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+var crypt = getUrlVars()["repo"];
+console.log(crypt);
+
+repoLink(crypt);
+
 //cs2103aug2015-w09-2j/main
-$("#searchButton").click(function(){
+function repoLink(crypt){
 
 
 
@@ -72,21 +91,19 @@ $("#searchButton").click(function(){
   $("#divTable").show();
   $("#all").show();
   $("#notificationButton").show();
-  $("#unsubButton").show();
   $("#tree-container").show();
   $("#br").show();
   
 
-  var link = $("#searchBox").val();
+  var user_project = decrypt(crypt);
+  console.log(user_project);
 
   //var crpyt = encrypt(link); 
-  
-  $.post( "/search", {
-      javascript_data: link //+ "?twr?" + crpyt
-  });
-
-
   /*
+  $.post( "/search", {
+      javascript_data: link + "?twr?" + crpyt
+  });
+  */
   var jj ='{"name": "tangwr/pig(master)","children": [{"name": "dog","children": [{"name": "cat.txt"}]}]}';
   
   var jj = '{"name": "tangwr/pig(master)","children": [{"name": "dog","children": [{"name": "cat.txt"}]},{"name": "test1","children" : [{"name" : "test1.txt"},{"name" : "test2","children" : [{"name" : "test2.txt"}]}]},{"name": "README.md"},{"name": "test.txt"}]}';
@@ -94,43 +111,40 @@ $("#searchButton").click(function(){
    $.post( "/treeJson", {
       javascript_data: jj
   });
-*/
 
-  $("#notifyRepo").val(link);
-  
+  //$("#notifyRepo").val(link);
+  /*
+
   if(link.indexOf(github_url) == 0){
     user_project = link.split(".com/")[1];
     
   }else{
     user_project = link;
   }
-
+  */
+  user_project = user_project.slice(0,-1);
+  console.log(user_project);
+  console.log(user_project.length);
   url = github_api + user_project;// + git_repo_type + git_option;
-
-
-  //console.log(user_project);
-  //treeJson.js
-  getTreeJson(url, user_project);
-
+  console.log(url);
+ 
   datatables(url);
   
   getHeatMap(url);
   getBarChart(url);
-  //getTree();
+	getTree();
  
-  $.post( "/deleteJson", {
-      javascript_data: "dd"
-  });
 
 
-});
+
+}
 
 $("#getButton").click(function(){
   d3.selectAll("svg").remove();
   $("#commitHistory").show();
   getMultiLineGraph(url);
   
-  getTreeJson(url, user_project);
+  
   getHeatMap(url);
   getBarChart(url);
   getTree();

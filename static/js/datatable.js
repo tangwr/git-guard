@@ -36,10 +36,10 @@ function datatables(url) {
   var table_columns = 5;
   var total_rows = 0;
   
-
+  var table = $('#userTable');
 
   
-
+  
   var table = $('#userTable').DataTable({  
     'columnDefs': [{
        'targets': table_columns-1,
@@ -52,6 +52,7 @@ function datatables(url) {
     }],
     'order': [[0, 'asc']]
   });
+
   
   table.clear();
     

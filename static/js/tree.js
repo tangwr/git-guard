@@ -1,5 +1,5 @@
-function pig(){
-    alert("pig");
+function fileHistory(d){
+    alert(d.name);
 }
 /*
 {
@@ -45,9 +45,13 @@ console.log(obj);
 // Get JSON data
 //"flare1.json"
 
-function getTree(){
-    treeJSON = d3.json("../static/flare.json", function(error, treeData) {
-    console.log(treeData);
+function getTree(){ 
+    treeJSON = d3.json("../static/tree.json", function(error, treeData) {
+    
+    //d3.selectAll("svg").remove();
+    //$("#tree-container").empty();
+    //alert("pikachu");
+    //console.log(treeData);
     console.log(error);
     console.log(treeJSON);
 
@@ -481,8 +485,8 @@ function getTree(){
 
             nodeEnter
               .append("a")
-                 .attr("xlink:href", function (d) {  return "#home"/* + d.id;*/ })
-                 .on("click", function(){ pig() })
+                 .attr("xlink:href", function (d) {  return "/"/* + d.id;*/ })
+                 .on("click", function(d){ fileHistory(d) })
               .append("rect")
                   .attr("class", "clickable")
                   .attr("y", -6)

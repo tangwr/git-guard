@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Assignment 5</title>
+	<title>Visual Git</title>
 
 	<!--d3.js version 3 -->
 	<script src="http://d3js.org/d3.v3.js"></script>
@@ -50,7 +50,7 @@
 	<div class="centered">
 		<form action="/logout" method="post">
 			<h1>
-				Git Guard {{user}}
+				VisualGit {{user}}
 
 				 {% for but in button %}
 	                   
@@ -61,10 +61,17 @@
 	                	<button class="btn btn-warning" type="button" id="registerButton" data-toggle="modal" data-target="#registerModal">Register</button>
 	                {% endif %}
 	                {% if but == "Notification" %}
-	                	
-	                		<button style="display: none;" class="btn btn-primary" type="button" id="notificationButton" data-toggle="modal" data-target="#notificationModal">Notifcation</button>
+	                	<!-- style="display: none;" -->
+	                		<button  class="btn btn-primary" type="button" id="notificationButton" data-toggle="modal" data-target="#notificationModal">Subscribe</button>
 	                	
 	                {% endif %}
+
+	                 {% if but == "Unsub" %}
+	                	
+	                		<button class="btn btn-primary" type="button" id="unsubButton" data-toggle="modal" data-target="#unsubModal">Unsubscribe</button>
+	                	
+	                {% endif %}
+
 	                {% if but == "Logout" %}
 	                	
 	                		<button class="btn btn-danger" type="submit" id="logoutButton" >Logout</button>
@@ -141,7 +148,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title">Notification</h4>
+			        <h4 class="modal-title">Subscription</h4>
 			      </div>
 			      <div class="modal-body">
 			      	Repository:
@@ -153,6 +160,32 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="submit" class="btn btn-primary" >Notify</button>
+			      </div>
+			    </div>
+			</form>    
+
+		  </div>
+		</div>
+
+		<!-- Modal -->
+		<div id="unsubModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		  	<form action="/unsub" method="post">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Unsubscribe</h4>
+			      </div>
+			      <div class="modal-body">
+			      	Are you sure you want to unsubscribe? Please give us a chance, we will improve our services. Please don't unsubscribe. Please... :'(
+			        
+			      
+			      </div>
+			      <div class="modal-footer">
+			        <button type="submit" class="btn btn-danger" >Unsubscribe</button>
+			        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
 			      </div>
 			    </div>
 			</form>    
@@ -182,16 +215,16 @@
 		<div class="col-md-8 navCenter">
 		<h3>Repository Summary</h3>
 			<ul class="nav nav-tabs">
-		        <li class="active"><a data-toggle="tab" href="#commitActivity">Commit Activity</a></li>
-		        <li><a data-toggle="tab" href="#punchCard">Punch Card</a></li>      
+		        <li><a data-toggle="tab" href="#commitActivity">Commit Activity</a></li>
+		        <li class="active"><a data-toggle="tab" href="#punchCard">Punch Card</a></li>      
 		    </ul>
 
 			<div class="tab-content">
-		        <div id="commitActivity" class="tab-pane fade in active">
+		        <div id="commitActivity" class="tab-pane fade">
 		        	<div id="commitActivityChart" align="center"></div>
 		        </div>
 
-			    <div id="punchCard" class="tab-pane fade">
+			    <div id="punchCard" class="tab-pane fade in active">
 			    	<br/>
 			    	<div id="punchCardChart" align="center"></div>
 			    </div>
@@ -280,8 +313,10 @@
 
 
 	<!--JS-->
-	
+	<script src="../static/js/encrypt.js"></script>
 	<script src="../static/js/datatable.js"></script>
+	<script src="../static/js/razaliTree.js"></script>
+	<script src="../static/js/treeJson.js"></script>
 	<script src="../static/js/button.js"></script>
 	<!--<script src="js/linegraph.js"></script>-->
 	<script src="../static/js/heatmap.js"></script>
@@ -289,6 +324,7 @@
 	<script src="../static/js/multiLine.js"></script>
 	<script src="../static/js/scroll.js"></script>
 	<script src="../static/js/tree.js"></script>
+	
 
 
 </body>

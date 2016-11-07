@@ -4,6 +4,9 @@ from datetime import datetime, timedelta
 from authenticate import Auth
 from Boto3Wrapper import Boto3Wrapper
 from Notification import Notifier
+import js2py
+import execjs
+import os
 
 
 app = Flask(__name__)
@@ -18,7 +21,7 @@ def getSession():
 		if session.get('user') is None:
 			button = ["Login", "Register"]
 		else:
-			button = ["Notification", "Logout"]
+			button = ["Notification", "Unsub", "Logout"]
 
 		return button
 
@@ -37,9 +40,15 @@ def main():
 	
 	return render_template("index.html", button=button, user="")
 
-@app.route('/tree')
-def tree():
-	return render_template("tree.html")
+
+
+@app.route('/repoLink')
+def repoLink():
+	return render_template("repo.html")
+
+#aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy90dW5nbmsxOTkzL3NjcmFweS9zdGF0cy9jb250cmlidXRvcnM
+#127.0.0.1:5000/repoLink?repo=dHVuZ25rMTk5My9zY3JhcHk
+
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -105,6 +114,11 @@ def notification():
 
 	#return redirect(url_for('main',msg=username))
 	return redirect("/")
+
+@app.route('/unsub', methods=['POST', 'GET'])
+def unsub():
+	return redirect("/")
+	
 """
 @app.route('/getmethod/<jsdata>')
 def get_javascript_data(jsdata):
@@ -123,23 +137,53 @@ def search():
 
 	
 	username = session["user"]
-	repo = request.form['javascript_data'] #.split("https://")[1]
+	repo = request.form['javascript_data']#.split("?twr?")[0] #.split("https://")[1]
 	
-	print repo 
+	print repo
 	print username
 	
-	b = Boto3Wrapper('subs3219')
-	n = Notifier(b)
+	try:
+		b = Boto3Wrapper('subs3219')
+		n = Notifier(b)
+		n.UpdateTime(username, repo)
 
-
-	n.UpdateTime(username, repo)
+	except:
+		return repo
 	
 	#return json.dumps({'message':'User created successfully !'})
 	
 	return repo
 
+@app.route('/treeJson', methods = ['POST'])
+def treeJson():
 
+	try:
+	    os.remove("static/tree.json")
+	except OSError:
+	    pass
+	
+	file = open("static/tree.json", "w")
+	data = request.form['javascript_data']
+	file.write(data)
+	file.close()
 
+	return ""
+	#js = "console.log('dddd')"
+	#execjs.eval(js)
+
+@app.route('/deleteJson', methods = ['POST'])
+def deleteJson():
+	try:
+	    os.remove("static/tree.json")
+	except OSError:
+	    pass
+	return ""
+	
+"""
+@app.route('/fileHistory')
+def fileHistory():
+	return redirect("/#kkk")
+"""
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
 	session.pop('user',None)
